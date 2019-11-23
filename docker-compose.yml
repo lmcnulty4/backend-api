@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  app:
+    # Uncomment the next line to use a non-root user. On Linux, this will prevent
+    # new files getting created as root, but you may need to update the USER_UID
+    # and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
+    # user: vscode
+    build: docker/app
+    # Setup the workspace environment
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+    # Prevent early exit
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_Kestrel__Endpoints__Http__Url: http://*:5000
+
+
+  db:
+    image: postgres:11-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: boxofficeinitiative
+      POSTGRES_PASSWORD: boxofficeinitiative_pass
+
+  nginx:
+    image: nginx:1.17-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./:/app
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 5050:8080
+    depends_on:
+      - db
