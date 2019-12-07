@@ -20,11 +20,19 @@ services:
 
 
   db:
-    image: postgres:11-alpine
-    restart: always
+    build: docker/db
+    # The below ports declaration lets us run this as a container without having
+    # to build an image of our web app (the above service), which would slow
+    # down development (instead we can just use `dotnet run`). We should then be
+    # able to connect to localhost:5432 from our web app to talk to the DB.
+    # To start just this service we can use:
+    # docker-compose up --no-deps --build -d db
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_USER: boxofficeinitiative
-      POSTGRES_PASSWORD: boxofficeinitiative_pass
+      PG_USER: boxofficeinitiative_user
+      PG_PASS: boxofficeinitiative_pass
+      PG_DB: boxofficeinitiative
 
   nginx:
     image: nginx:1.17-alpine
