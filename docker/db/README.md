@@ -27,7 +27,7 @@ Tables:
   One row per person. Fields:  
   * id INT8 - the primary key
   * display_name TEXT - the full name displayed everywhere
-  * sex TEXT - Male/Female/Non-binary (per OpusData)
+  * gender TEXT - Male/Female/Non-binary (per OpusData)
   * name_prefix TEXT - any name prefix (e.g. 'Dame')
   * first_name TEXT - person's first name
   * middle_names TEXT - any middle names

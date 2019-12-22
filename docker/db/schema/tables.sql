@@ -36,7 +36,7 @@ CREATE TABLe boi.studios (
 CREATE TABLE boi.people (
     id BIGSERIAL PRIMARY KEY,
     display_name TEXT NOT NULL,
-    sex TEXT,
+    gender TEXT,
     name_prefix TEXT,
     first_name TEXT,
     middle_names TEXT,
