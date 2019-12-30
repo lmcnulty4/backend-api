@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-run_cmd="dotnet run --server.urls http://*:5000"
+run_cmd="dotnet run -p BoxOfficeInitiative --server.urls http://*:5000"
 
 # wait for database
 #until dotnet ef database update; do
