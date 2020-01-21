@@ -1,0 +1,17 @@
+name: Trigger Jenkins dev CI
+
+on: [pull_request]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Main
+      uses: appleboy/jenkins-action@master
+      if: github.event.pull_request.merged
+      with:
+        url: "https://ci.boxofficeinitiative.dev/"
+        user: "github"
+        token: ${{ secrets.JENKINS_TOKEN }}
+        job: "Backend-API"
