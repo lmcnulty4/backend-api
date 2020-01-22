@@ -8,7 +8,7 @@ namespace BoxOfficeInitiative.Tests
         [Fact]
         public void Test1()
         {
-
+            Assert.True(true, "True is true");
         }
     }
 }
